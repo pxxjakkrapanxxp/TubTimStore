@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -514,6 +515,7 @@
         let selectedAmount = 0;
         let selectedPackageName = '';
 
+        // เชื่อมหลังบ้านพอร์ต 3000 ที่รันในเครื่อง CMD
         function loginWithLine() {
             window.location.href = 'http://localhost:3000/auth/line';
         }
@@ -522,7 +524,7 @@
             const urlParams = new URLSearchParams(window.location.search);
             const loginStatus = urlParams.get('login');
             const userName = urlParams.get('name');
-            const userImg = urlParams.get('img');
+            const userImg = urlParams.get('picture'); // 🚨 [แก้ไขแล้ว]: เปลี่ยนจาก 'img' เป็น 'picture' ให้ตรงตามหลังบ้านส่งมา
 
             if (loginStatus === 'success' && userName) {
                 document.getElementById('userName').innerText = userName;
@@ -533,14 +535,12 @@
                 }
                 document.getElementById('loggedInUser').style.display = 'flex';
                 
-                // ซ่อนการ์ดปุ่มล็อกอินเพื่อความสวยงามเมื่อผู้ใช้ล็อกอินแล้ว
                 if(document.getElementById('loginSection')) {
                     document.getElementById('loginSection').style.display = 'none';
                 }
                 
                 alert('ยินดีต้อนรับคุณ ' + userName + ' เข้าสู่ระบบด้วย LINE สำเร็จแล้วครับ!');
                 
-                // เคลียร์ URL parameter ออกเพื่อให้เปิดซ้ำหรือรีเฟรชแล้วไม่ติดค่าเดิม
                 window.history.replaceState({}, document.title, window.location.pathname);
             }
         });
